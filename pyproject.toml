@@ -1,0 +1,23 @@
+# pyproject.toml
+[tool.mypy]  # Mypy 的配置必须放在 [tool.mypy] 节点下
+# 1. 要检查的 Python 文件/目录（必填，否则 Mypy 不知道检查哪些文件）
+files = [
+    # "src/",          # 检查 src 目录下所有 .py 文件
+    # "main.py",       # 检查单独的 main.py 文件
+    # "tests/"         # 检查 tests 目录（可选）
+    "*.py"
+]
+
+# 2. 基础检查规则（根据需求开启，以下是常用配置）
+strict = true  # 开启「严格模式」（推荐！强制最全面的类型检查，比如未标注类型、不兼容类型都会报错）
+check_untyped_defs = true  # 检查未标注类型的函数（即使没写 -> int 这类返回值，也会分析逻辑报错）
+disallow_untyped_calls = true  # 禁止调用未标注类型的函数
+ignore_missing_imports = false  # 不忽略「缺失的导入」（比如导入了不存在的包，会报错提醒）
+pretty = true  # 美化错误输出（让报错信息更易读，带颜色和缩进）
+
+# 3. 特殊场景配置（可选，根据项目调整）
+exclude = [  # 排除不需要检查的文件/目录
+    "src/legacy/",  # 排除旧代码目录
+    "**/__init__.py"  # 排除所有 __init__.py（如果不需要检查）
+]
+# mypy_path = ["src/"]  # 告诉 Mypy 去哪里找自定义模块（比如 src 目录下的模块，避免导入报错）
